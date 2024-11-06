@@ -6,7 +6,7 @@ const Products = async () => {
     const products = await response.json();
     console.log(products);
     return (
-        <section className='flex gap-4 flex-wrap'>
+        <section className='flex gap-8 flex-wrap p-10'>
             {products?.products?.map((productData: any) => (
                 <Product
                     key={productData?.id}
