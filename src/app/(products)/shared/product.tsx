@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useCartStore } from '../../stores/cart-store';
 import { toast } from 'react-toastify';
 import { ProductType } from '../../types/types';
-const Product = ({ product }: { product: any }) => {
+const Product = ({ product }: { product: ProductType }) => {
     const [showAllDescription, setShowAllDescription] = useState(false);
     const { update }: any = useCartStore();
     const handleAddToCart = async (product: ProductType) => {
@@ -20,6 +20,7 @@ const Product = ({ product }: { product: any }) => {
             toast.success('Item added to cart');
             update(data);
         } catch (error) {
+            console.error(error);
             toast.error('Please try again');
         }
     };

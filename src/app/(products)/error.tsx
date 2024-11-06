@@ -3,7 +3,7 @@
 import React from 'react';
 
 const error = () => {
-    return <div></div>;
+    return <div>Error while fetching data</div>;
 };
 
 export default error;
