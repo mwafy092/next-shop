@@ -3,9 +3,11 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import CartCard from './shared/cart-card';
 import { toast } from 'react-toastify';
+import { useCartStore } from '../stores/cart-store';
 
 const Page = () => {
     const [cart, setCart] = useState([]);
+    const { update } = useCartStore();
     useEffect(() => {
         const fetchCart = async () => {
             const res = await fetch('http://localhost:3000/cart-api');
@@ -27,6 +29,7 @@ const Page = () => {
             const data = await res.json();
             toast.success('Item deleted successfully');
             setCart(data);
+            update(data);
         } catch (error) {
             toast.error('Something went wrong');
         }
