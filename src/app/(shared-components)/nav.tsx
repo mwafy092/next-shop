@@ -17,7 +17,7 @@ const Nav = () => {
         fetchCart();
     }, [cartStore]);
     return (
-        <nav className='bg-green-600 text-white h-20 p-4 flex justify-between items-center'>
+        <nav className='bg-green-600 text-white h-20 p-4 flex justify-between items-center sticky top-0 shadow-md'>
             <div className='flex items-center gap-8'>
                 <Link
                     href='/'
