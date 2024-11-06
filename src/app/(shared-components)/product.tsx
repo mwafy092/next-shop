@@ -103,7 +103,7 @@ const Product = ({ product }: { product: any }) => {
                 <button
                     className='bg-green-600 text-sm text-white py-1 px-3 rounded-md w-full my-2'
                     onClick={() => handleAddToCart(product)}>
-                    Buy Now
+                    Add to cart
                 </button>
             </div>
         </div>

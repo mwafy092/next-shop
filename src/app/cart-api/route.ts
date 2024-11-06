@@ -1,4 +1,4 @@
-export const cart: any = [];
+export let cart: any = [];
 
 export async function GET() {
     return Response.json(cart);
@@ -6,9 +6,21 @@ export async function GET() {
 
 export async function POST(request: Request) {
     const product = await request.json();
-    console.log(product);
     cart.push(product);
-    console.log(cart);
+    return new Response(JSON.stringify(cart), {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        status: 201,
+    });
+}
+
+export async function DELETE(request: Request) {
+    const product = await request.json();
+    const newCart = cart.filter(
+        (cartItem: any) => cartItem?.id !== product?.id
+    );
+    cart = newCart;
     return new Response(JSON.stringify(cart), {
         headers: {
             'Content-Type': 'application/json',
