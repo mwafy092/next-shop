@@ -7,12 +7,14 @@ import { useCartStore } from '../stores/cart-store';
 import { ProductType } from '../types/types';
 const Page = () => {
     const [cart, setCart] = useState<ProductType[]>([]);
+    const [total, setTotal] = useState<number>(0);
     const { update }: any = useCartStore();
     useEffect(() => {
         const fetchCart = async () => {
             const res = await fetch('http://localhost:3000/cart-api');
             const cart = await res.json();
             setCart(cart);
+            handleGetCartTotal(cart);
         };
         fetchCart();
     }, []);
@@ -29,21 +31,39 @@ const Page = () => {
             toast.success('Item deleted successfully');
             setCart(data);
             update(data);
+            handleGetCartTotal(data);
         } catch (error) {
             toast.error('Something went wrong');
         }
     };
+
+    const handleGetCartTotal = (cartData: ProductType[]) => {
+        let total = 0;
+        cartData.forEach((cartItem: ProductType) => {
+            total += cartItem.price;
+        });
+        console.log(total);
+        setTotal(total);
+    };
     return (
         <section className='p-12 bg-slate-100'>
             <h1 className='text-2xl font-bold'>Shopping cart</h1>
-            <div className='flex flex-col rounded-2xl'>
-                {cart.map((cartItem: ProductType, index: number) => (
-                    <CartCard
-                        key={index}
-                        cartItem={cartItem}
-                        handleDeleteProduct={handleDeleteProduct}
-                    />
-                ))}
+            <div className='flex gap-2 flex-wrap'>
+                <div className='flex flex-col rounded-2xl flex-1'>
+                    {cart.map((cartItem: ProductType, index: number) => (
+                        <CartCard
+                            key={index}
+                            cartItem={cartItem}
+                            handleDeleteProduct={handleDeleteProduct}
+                        />
+                    ))}
+                </div>
+                {total > 0 && (
+                    <div className='w-80 bg-slate-500 text-white p-6 rounded-md h-fit'>
+                        <h2 className='text-2xl'>Cart total</h2>
+                        <p>$ {total}</p>
+                    </div>
+                )}
             </div>
         </section>
     );
