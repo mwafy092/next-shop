@@ -5,6 +5,7 @@ import CartCard from './shared/cart-card';
 import { toast } from 'react-toastify';
 import { useCartStore } from '../stores/cart-store';
 import { ProductType } from '../types/types';
+import Link from 'next/link';
 const Page = () => {
     const [cart, setCart] = useState<ProductType[]>([]);
     const [total, setTotal] = useState<number>(0);
@@ -45,6 +46,18 @@ const Page = () => {
         console.log(total);
         setTotal(total);
     };
+    if (cart.length === 0) {
+        return (
+            <section className='p-10'>
+                <h1 className='text-2xl'>Empty Cart</h1>
+                <Link
+                    href='/'
+                    className='text-sm underline'>
+                    Continue shopping
+                </Link>
+            </section>
+        );
+    }
     return (
         <section className='p-12 bg-slate-100'>
             <h1 className='text-2xl font-bold'>Shopping cart</h1>
