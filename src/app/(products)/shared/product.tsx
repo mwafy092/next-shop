@@ -16,7 +16,7 @@ const Product = ({ product }: { product: ProductType }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(product),
+                body: JSON.stringify({ ...product, count: 1 }),
             });
             const data = await res.json();
             toast.success('Item added to cart');

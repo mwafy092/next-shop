@@ -14,8 +14,8 @@ const Page = () => {
         const fetchCart = async () => {
             const res = await fetch('http://localhost:3000/cart-api');
             const cart = await res.json();
-            setCart(cart);
             handleGetCartTotal(cart);
+            handleMergeCart(cart);
         };
         fetchCart();
     }, []);
@@ -30,9 +30,9 @@ const Page = () => {
             });
             const data: ProductType[] = await res.json();
             toast.success('Item deleted successfully');
-            setCart(data);
             update(data);
             handleGetCartTotal(data);
+            handleMergeCart(data);
         } catch (error) {
             toast.error('Something went wrong');
         }
@@ -45,6 +45,25 @@ const Page = () => {
         });
         console.log(total);
         setTotal(total);
+    };
+    const handleMergeCart = (cart: ProductType[]) => {
+        const mergedData: ProductType[] = cart.reduce(
+            (acc: ProductType[], current: ProductType) => {
+                const existing = acc.find(
+                    (item: ProductType) => item.id === current.id
+                );
+
+                if (existing) {
+                    existing.count += current.count;
+                } else {
+                    acc.push({ ...current });
+                }
+
+                return acc;
+            },
+            []
+        );
+        setCart(mergedData);
     };
     if (cart.length === 0) {
         return (

@@ -26,7 +26,8 @@ const CartCard = ({
                 </div>
             </div>
             <div className='flex flex-col gap-3 justify-center items-center'>
-                <p>$ {cartItem?.price}</p>
+                <p>Items: {cartItem?.count}</p>
+                <p>$ {cartItem?.price * cartItem?.count}</p>
                 <button
                     className='flex gap-1 items-center'
                     onClick={() => handleDeleteProduct(cartItem)}>

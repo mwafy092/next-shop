@@ -12,6 +12,7 @@ export type ProductType = {
     sku: string;
     brand?: string;
     weight: number;
+    count: number;
     dimensions: {
         width: number;
         height: number;
