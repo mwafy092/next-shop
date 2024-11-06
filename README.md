@@ -14,5 +14,6 @@
 3. react toastify
 4. typescript
 5. SSR used along side prereload render for client side components
+6. Routing api used to create a cart api for get, post and delete
 
 Note: While using latest Next js 15 to utilize the latest rendring technologies, i faced some outdated packages related to zustand and react toastify, however using "--force" will fix all issues and will work normally
