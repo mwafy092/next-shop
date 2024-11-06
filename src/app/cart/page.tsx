@@ -93,7 +93,7 @@ const Page = () => {
                 {total > 0 && (
                     <div className='w-80 bg-slate-500 text-white p-6 rounded-md h-fit'>
                         <h2 className='text-2xl'>Cart total</h2>
-                        <p>$ {total}</p>
+                        <p>$ {total.toFixed(2)}</p>
                     </div>
                 )}
             </div>
