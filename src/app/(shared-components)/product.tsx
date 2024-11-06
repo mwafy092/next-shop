@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useCartStore } from '../stores/cart-store';
+import { toast } from 'react-toastify';
+
 const Product = ({ product }: { product: any }) => {
     const [showAllDescription, setShowAllDescription] = useState(false);
     const { update } = useCartStore();
@@ -15,9 +17,10 @@ const Product = ({ product }: { product: any }) => {
                 body: JSON.stringify(product),
             });
             const data = await res.json();
+            toast.success('Item added to cart');
             update(data);
         } catch (error) {
-            console.error(error);
+            toast.error('Please try again');
         }
     };
     return (

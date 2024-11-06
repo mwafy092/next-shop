@@ -2,6 +2,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import CartCard from './shared/cart-card';
+import { toast } from 'react-toastify';
+
 const Page = () => {
     const [cart, setCart] = useState([]);
     useEffect(() => {
@@ -23,9 +25,10 @@ const Page = () => {
                 body: JSON.stringify(product),
             });
             const data = await res.json();
+            toast.success('Item deleted successfully');
             setCart(data);
         } catch (error) {
-            console.error(error);
+            toast.error('Something went wrong');
         }
     };
     return (
