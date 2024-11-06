@@ -11,18 +11,16 @@ const Product = ({ product }: { product: ProductType }) => {
     const handleAddToCart = async (product: ProductType) => {
         setSubmitLoading(true);
         try {
-            setTimeout(async () => {
-                const res = await fetch('http://localhost:3000/cart-api', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(product),
-                });
-                const data = await res.json();
-                toast.success('Item added to cart');
-                update(data);
-            }, 2000);
+            const res = await fetch('http://localhost:3000/cart-api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(product),
+            });
+            const data = await res.json();
+            toast.success('Item added to cart');
+            update(data);
         } catch (error) {
             console.error(error);
             toast.error('Please try again');
