@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-
+import { ProductType } from '../types/types';
 export const useCartStore = create((set) => ({
-    cart: 0,
-    update: (cart) => set(() => ({ cart })),
+    cart: [],
+    update: (cart: ProductType[]) => set(() => ({ cart })),
 }));

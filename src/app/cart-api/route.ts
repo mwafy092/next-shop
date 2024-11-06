@@ -1,4 +1,5 @@
-export let cart: any = [];
+import { ProductType } from '../types/types';
+export let cart: ProductType[] = [];
 
 export async function GET() {
     return Response.json(cart);
@@ -17,8 +18,8 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
     const product = await request.json();
-    const newCart = cart.filter(
-        (cartItem: any) => cartItem?.id !== product?.id
+    const newCart: ProductType[] = cart.filter(
+        (cartItem: ProductType) => cartItem?.id !== product?.id
     );
     cart = newCart;
     return new Response(JSON.stringify(cart), {

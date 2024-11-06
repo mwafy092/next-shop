@@ -1,6 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-const CartCard = ({ cartItem, handleDeleteProduct }) => {
+import { ProductType } from '@/app/types/types';
+const CartCard = ({
+    cartItem,
+    handleDeleteProduct,
+}: {
+    cartItem: ProductType;
+    handleDeleteProduct: Function;
+}) => {
     return (
         <div className=' p-6 flex gap-4 border-b-2 justify-between items-center'>
             <div className='flex  gap-4 '>

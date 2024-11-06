@@ -4,14 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useCartStore } from '../stores/cart-store';
+import { ProductType } from '../types/types';
 const Nav = () => {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState<ProductType[]>([]);
     const cartStore = useCartStore();
     useEffect(() => {
         const fetchCart = async () => {
-            const res = await fetch('http://localhost:3000/cart-api');
-            const cart = await res.json();
-            console.log(cart);
+            const res: Response = await fetch('http://localhost:3000/cart-api');
+            const cart: ProductType[] = await res.json();
             setCart(cart);
         };
         fetchCart();

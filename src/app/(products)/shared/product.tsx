@@ -1,13 +1,13 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { useCartStore } from '../stores/cart-store';
+import { useCartStore } from '../../stores/cart-store';
 import { toast } from 'react-toastify';
-
+import { ProductType } from '../../types/types';
 const Product = ({ product }: { product: any }) => {
     const [showAllDescription, setShowAllDescription] = useState(false);
-    const { update } = useCartStore();
-    const handleAddToCart = async (product) => {
+    const { update }: any = useCartStore();
+    const handleAddToCart = async (product: ProductType) => {
         try {
             const res = await fetch('http://localhost:3000/cart-api', {
                 method: 'POST',
