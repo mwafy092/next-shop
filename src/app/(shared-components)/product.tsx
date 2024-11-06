@@ -1,17 +1,21 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useCartStore } from '../stores/cart-store';
 const Product = ({ product }: { product: any }) => {
     const [showAllDescription, setShowAllDescription] = useState(false);
+    const { update } = useCartStore();
     const handleAddToCart = async (product) => {
         try {
-            await fetch('http://localhost:3000/cart-api', {
+            const res = await fetch('http://localhost:3000/cart-api', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(product),
             });
+            const data = await res.json();
+            update(data);
         } catch (error) {
             console.error(error);
         }

@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     console.log(product);
     cart.push(product);
     console.log(cart);
-    return new Response(JSON.stringify(product), {
+    return new Response(JSON.stringify(cart), {
         headers: {
             'Content-Type': 'application/json',
         },

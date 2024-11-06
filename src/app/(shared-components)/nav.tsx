@@ -3,8 +3,10 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useCartStore } from '../stores/cart-store';
 const Nav = () => {
     const [cart, setCart] = useState([]);
+    const cartStore = useCartStore();
     useEffect(() => {
         const fetchCart = async () => {
             const res = await fetch('http://localhost:3000/cart-api');
@@ -13,7 +15,7 @@ const Nav = () => {
             setCart(cart);
         };
         fetchCart();
-    }, []);
+    }, [cartStore]);
     return (
         <nav className='bg-green-600 text-white h-16 p-4 flex justify-between items-center px-20'>
             <div className='flex items-center gap-20'>
