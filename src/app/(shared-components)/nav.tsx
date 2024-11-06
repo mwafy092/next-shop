@@ -6,7 +6,7 @@ import { useState } from 'react';
 const Nav = () => {
     const [cart, setCart] = useState([]);
     return (
-        <nav className='bg-green-800 text-white h-16 p-4 flex justify-between items-center px-20'>
+        <nav className='bg-green-600 text-white h-16 p-4 flex justify-between items-center px-20'>
             <div className='flex items-center gap-20'>
                 <Link
                     href='/'
