@@ -6,22 +6,30 @@ import { toast } from 'react-toastify';
 import { ProductType } from '../../types/types';
 const Product = ({ product }: { product: ProductType }) => {
     const [showAllDescription, setShowAllDescription] = useState(false);
+    const [submitLoading, setSubmitLoading] = useState(false);
     const { update }: any = useCartStore();
     const handleAddToCart = async (product: ProductType) => {
+        setSubmitLoading(true);
         try {
-            const res = await fetch('http://localhost:3000/cart-api', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(product),
-            });
-            const data = await res.json();
-            toast.success('Item added to cart');
-            update(data);
+            setTimeout(async () => {
+                const res = await fetch('http://localhost:3000/cart-api', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(product),
+                });
+                const data = await res.json();
+                toast.success('Item added to cart');
+                update(data);
+            }, 2000);
         } catch (error) {
             console.error(error);
             toast.error('Please try again');
+        } finally {
+            setTimeout(() => {
+                setSubmitLoading(false);
+            }, 2000);
         }
     };
     return (
@@ -105,8 +113,9 @@ const Product = ({ product }: { product: ProductType }) => {
                     </div>
                 </div>
                 <button
-                    className='bg-green-600 text-sm text-white py-1 px-3 rounded-md w-full my-2 hover:bg-green-400 transition-all duration-300 active:bg-green-600'
-                    onClick={() => handleAddToCart(product)}>
+                    className='bg-green-600 text-sm text-white py-1 px-3 rounded-md w-full my-2 hover:bg-green-400 transition-all duration-300 active:bg-green-600 disabled:bg-slate-300'
+                    onClick={() => handleAddToCart(product)}
+                    disabled={submitLoading}>
                     Add to cart
                 </button>
             </div>
