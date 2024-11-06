@@ -2,9 +2,18 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 const Nav = () => {
     const [cart, setCart] = useState([]);
+    useEffect(() => {
+        const fetchCart = async () => {
+            const res = await fetch('http://localhost:3000/cart-api');
+            const cart = await res.json();
+            console.log(cart);
+            setCart(cart);
+        };
+        fetchCart();
+    }, []);
     return (
         <nav className='bg-green-600 text-white h-16 p-4 flex justify-between items-center px-20'>
             <div className='flex items-center gap-20'>
@@ -19,9 +28,15 @@ const Nav = () => {
                     />
                     <span className='font-bold'>Next Shop</span>
                 </Link>
-                <button className='font-bold'>Home</button>
+                <Link
+                    href='/'
+                    className='font-bold'>
+                    Home
+                </Link>
             </div>
-            <button className='flex gap-2 items-center'>
+            <Link
+                href='/cart'
+                className='flex gap-2 items-center'>
                 <Image
                     src='/icons/cart.png'
                     width={32}
@@ -29,7 +44,7 @@ const Nav = () => {
                     alt='cart icon'
                 />
                 <span>{cart.length}</span>
-            </button>
+            </Link>
         </nav>
     );
 };

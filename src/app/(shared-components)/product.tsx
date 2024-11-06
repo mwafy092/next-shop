@@ -3,7 +3,19 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 const Product = ({ product }: { product: any }) => {
     const [showAllDescription, setShowAllDescription] = useState(false);
-
+    const handleAddToCart = async (product) => {
+        try {
+            await fetch('http://localhost:3000/cart-api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(product),
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
         <div className='bg-white rounded-2xl shadow-lg w-80 h-auto flex flex-col justify-beween'>
             <div className='flex justify-center bg-green-100 rounded-t-3xl'>
@@ -84,7 +96,9 @@ const Product = ({ product }: { product: any }) => {
                         )}
                     </div>
                 </div>
-                <button className='bg-green-600 text-sm text-white py-1 px-3 rounded-md w-full my-2'>
+                <button
+                    className='bg-green-600 text-sm text-white py-1 px-3 rounded-md w-full my-2'
+                    onClick={() => handleAddToCart(product)}>
                     Buy Now
                 </button>
             </div>
