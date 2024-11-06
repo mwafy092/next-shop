@@ -36,7 +36,7 @@ const Page = () => {
     return (
         <section className='p-12 bg-slate-100'>
             <h1 className='text-2xl font-bold'>Shopping cart</h1>
-            <div className='flex flex-col rounded-2xl shadow-xl'>
+            <div className='flex flex-col rounded-2xl'>
                 {cart.map((cartItem: ProductType, index: number) => (
                     <CartCard
                         key={index}
